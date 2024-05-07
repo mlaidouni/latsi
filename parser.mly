@@ -8,7 +8,7 @@ open Ast
 %token<int> CHIFFRE
 %token<string> STRING
 
-%start<Ast.ligne list> programme
+%start<Ast.lignes> programme
 
 %%
 
@@ -38,7 +38,7 @@ exprlist:
 // Définition: (<string> | <expression> ) pour les <exprlist>
 stringexpr:
 | s = STRING { String s }
-| e = expression { e }
+| e = expression { Print_expression e }
 
 // Définition: <var> {, <var>}
 varlist:
@@ -62,7 +62,10 @@ facteur:
 relop:
 | EQUAL { Equal }
 | INF { Inf }
-| SUPP { Supp }
+| SUP { Sup }
+| INFEQ {Infeq}
+| SUPEQ {Supeq}
+| NEQ {Neq}
 
 // Définition: opérateurs pour les <expression>
 plusmoins:

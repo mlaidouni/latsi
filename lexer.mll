@@ -4,10 +4,8 @@ open Parser
 
 let layout = [ ' ' '\t' '\n' ]
 let string = ['[' ' ' ',' ''' '_' ';' ':' '(' ')' '.' 'a'-'z' 'A'-'Z' ']' '*']
-(* let relop = '<' ['>' | '=']? | '>' ['<' | '=']?  | '=' *)
 let var = ['A'-'Z']
-let chiffre = ['0'-'9']
-let nombre = chiffre+
+let nombre = ['0'-'9']+
 
 rule main = parse
   |  layout    { main lexbuf }
@@ -29,7 +27,10 @@ rule main = parse
   | '/'        { DIV }
   | '='        { EQUAL }
   | '<'        { INF }
-  | '>'        { SUPP }
+  | '>'        { SUP }
+  | "<>"       { NEQ }
+  | "<="       { INFEQ }
+  | ">="       { SUPEQ }
   | '"'        { QUOTE }
   | ','        { VIRGULE }
   | var        { VAR (Lexing.lexeme lexbuf) }
