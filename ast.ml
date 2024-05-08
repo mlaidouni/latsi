@@ -3,17 +3,19 @@ type plusmoins = Plus | Moins
 type multdiv = Mult | Div
 
 type var = string 
+and varlist= var list
+
+type nombre = int 
 
 type facteur = Var of var | Nombre of int | Expression of expression
 
-
 and relop = Equal | Inf | Infeq | Sup | Supeq | Neq
-
 
 and term=facteur * (multdiv * facteur) list 
 
+and ligne = Ligne of (nombre  * instr)
 
-and ligne = int  * instr
+and programme = ligne list
 
 and expression = term * (plusmoins * term) list
 
@@ -23,6 +25,7 @@ and instr =
   | Imprime of (type_print list)
   | SiAlors of  expression * relop * expression * instr
   | Vavers of expression
+  | Entree of varlist
   | Affectation of var * expression
   | Fin
   | Rem of string
@@ -34,7 +37,7 @@ exception Empty_program
 
 (* Définition de la variable qui env qui stock la ligne actuel et les variables qui ont été assigées *)
 type env = {
-    lignes : ligne list;
+    programme : programme;
     mutable var_liste : (var*int) list ;
     mutable index : int;
   }
@@ -94,7 +97,12 @@ let rec eval_instruction env = function
   eval_instruction env instruction 
   else env.index<-env.index+1
 |Vavers _ -> ()
+|Entree _ -> ()
 |Affectation (s,e)-> new_var s (eval_expression env e ) env ; env.index<-env.index+1
 |Fin -> exit 0
 |Rem _-> env.index<-env.index+1
 |Nl-> print_newline(); env.index<-env.index+1
+
+
+let eval_ligne env =function
+|Ligne(_,i)-> eval_instruction env i

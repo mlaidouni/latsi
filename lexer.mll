@@ -31,9 +31,9 @@ rule main = parse
   | "<>"       { NEQ }
   | "<="       { INFEQ }
   | ">="       { SUPEQ }
-  | '"'        { QUOTE }
+  (* | '"'        { QUOTE } *)
   | ','        { VIRGULE }
   | var        { VAR (Lexing.lexeme lexbuf) }
-  | nombre     { NOMBRE (Lexing.lexeme lexbuf) }
+  | nombre     { NOMBRE (int_of_string(Lexing.lexeme lexbuf)) }
   | string+    { STRING (Lexing.lexeme lexbuf) }
   | _          { failwith "unexpected character" }

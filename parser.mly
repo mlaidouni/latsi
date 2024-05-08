@@ -3,12 +3,12 @@ open Ast
 %}
 
 %token IMPRIME SI ALORS VAVERS ENTREE FIN REM NL EOF CR RPAR LPAR PLUS MOINS
-%token MULT DIV EQUAL INF SUPP QUOTE NOMBRE VIRGULE
+%token MULT DIV EQUAL INF SUP VIRGULE SUPEQ INFEQ NEQ //Quote    
+%token<int> NOMBRE    
 %token<string> VAR
-%token<int> CHIFFRE
 %token<string> STRING
 
-%start<Ast.lignes> programme
+%start<Ast.programme> programme
 
 %%
 
@@ -18,12 +18,12 @@ programme:
 
 // Définition: <nombre> <instr> CR
 ligne:
-| n = NOMBRE i = instr CR { Ligne (n, i) }
+| n = NOMBRE i = instr CR { (n, i) }
 
 // Définition d'une instruction
 instr:
 | IMPRIME el = exprlist { Imprime el }
-| SI e1 = expression r = relop e2 = expression ALORS i = instr {SiAlors (r, e1, e2, i)}
+| SI e1 = expression r = relop e2 = expression ALORS i = instr {SiAlors ( e1, r, e2, i)}
 | VAVERS e = expression { Vavers e }
 | ENTREE vl = varlist { Entree vl }
 | v = VAR EQUAL e = expression { Affectation (v, e) }
@@ -45,18 +45,19 @@ varlist:
 | ls = separated_list(VIRGULE, VAR) { ls }
 
 // Définition: <expression> {<plusmoins> <term>}
-expression:
-| ex = separated_list(plusmoins, term) { ex }
-
-// Définition: <facteur> {multdiv <facteur>}
 term:
-| t = separated_list(multdiv, facteur) { t }
+| f = facteur { (f, []) }
+| f = facteur m = multdiv t = facteur rest = term { (f, (m, t) :: snd rest) }
+
+expression:
+| f = term { (f, []) }
+| f = term m = plusmoins t = term rest = expression { (f, (m, t) :: snd rest) }
 
 // Définition: <var> | <nombre> | "("<expression>")" 
 facteur:
 | v = VAR { Var v }
-| n = NOMBRE { n }
-| LPAR e = expression RPAR { e }
+| n = NOMBRE { Nombre n }
+| LPAR e = expression RPAR { Expression e }
 
 // Définition: <relop> pour les <instr>
 relop:
