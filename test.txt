@@ -1,10 +1,18 @@
 5 REM "Ce programme est formidable."
 10 IMPRIME "Bonjour Paris"
-15 NL
-20 I = 0
-30 SI I > 10 ALORS VAVERS 40
-35 IMPRIME I, " "
-37 I = I + 1
-39 VAVERS 30
-40 FIN
-50 IMPRIME "ne s'imprime pas"
+11 I = 0
+12 SI I <= 0 ALORS NL
+13 I = 1
+14 SI I = 1 ALORS NL
+15 SI I > 10 ALORS FIN
+16 IMPRIME 8, " ", "AYADI'janad" ," "
+17 SI I = 0 ALORS NL
+18 IMPRIME "ALO"
+20 SI I > 2 ALORS NL
+30 SI I > 2 ALORS NL
+40 SI I > 2 ALORS NL
+45 REM "Alo"
+50 REM "Ne s'affiche pas"
+60 FIN
+70 REM "ALOOOOOOOOOO"
+80 IMPRIME "ELYOGANGSHIT"

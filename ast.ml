@@ -42,7 +42,7 @@ type env = {
     mutable index : int;
   }
 
-  (* Vérifie que la variable s est bien défini *)
+(* Vérifie que la variable s est bien défini *)
 let rec get_var s = function 
 |[]->None 
 |(a,b)::t-> if (String.equal s a) then Some b else get_var s t
