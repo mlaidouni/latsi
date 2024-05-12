@@ -1,5 +1,5 @@
 %{
-open Ast
+open Ast  
 %}
 
 %token IMPRIME SI ALORS VAVERS ENTREE FIN REM NL EOF CR RPAR LPAR PLUS MOINS
@@ -7,6 +7,8 @@ open Ast
 %token<int> NOMBRE    
 %token<string> VAR
 %token<string> STRING
+
+
 
 %start<Ast.programme> programme
 
@@ -18,7 +20,7 @@ programme:
 
 // Définition: <nombre> <instr> CR
 ligne:
-| n = NOMBRE i = instr CR { (n, i) }
+| n = NOMBRE i = instr CR {Ligne (n, i) }
 
 // Définition d'une instruction
 instr:
