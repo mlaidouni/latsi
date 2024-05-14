@@ -91,13 +91,28 @@ let new_var s v env = match (get_var s env.var_liste ) with
 |None -> env.var_liste <- ((s,v) :: env.var_liste) 
 |Some x ->env.var_liste<- (s,v)::List.filter (fun a -> a!=(s,x)) env.var_liste
 
+
+let rec enter env = function 
+| v::t -> 
+    (try
+       print_endline ("Reading input for variable: " ^ v);
+       let nb = input_line stdin in  (* Utilisation de input_line avec stdin *)
+       let x = int_of_string nb in 
+       new_var v x env; 
+       enter env t
+     with
+     | End_of_file -> print_endline "End of input"
+     | Failure _ -> print_endline "Invalid input format"; enter env t)
+| [] -> ()
+
+
 let rec eval_instruction env = function 
 |Imprime l -> print_expression env l; print_newline(); env.index<-env.index+1
 |SiAlors (e1, r, e2, instruction)-> if (eval_relop r (eval_expression env e1) (eval_expression env e2 )) then 
   eval_instruction env instruction 
   else env.index<-env.index+1
 |Vavers _ -> ()
-|Entree _ -> ()
+|Entree vl -> enter env vl ; env.index<-env.index+1
 |Affectation (s,e)-> new_var s (eval_expression env e ) env ; env.index<-env.index+1
 |Fin -> exit 0
 |Rem _-> env.index<-env.index+1

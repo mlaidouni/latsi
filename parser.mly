@@ -50,14 +50,14 @@ expression:
 | t = term rest = expr_tail { (t, rest) }
 
 expr_tail:
-| pm = plusmoins t = term tail = expr_tail { (pm, t) :: rest }
+| pm = plusmoins t = term tail = expr_tail { (pm, t) :: tail }
 | { [] }
 
 term:
 | f = facteur rest = term_tail { (f, rest) }
 
 term_tail:
-| md = multdiv f = facteur tail = term_tail { (md, f) :: rest }
+| md = multdiv f = facteur tail = term_tail { (md, f) :: tail }
 | { [] }
 
 // Définition: <var> | <nombre> | "("<expression>")" 
