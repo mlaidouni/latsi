@@ -9,7 +9,6 @@ open Ast
 %token<string> STRING
 
 
-
 %start<Ast.programme> programme
 
 %%
@@ -47,13 +46,19 @@ varlist:
 | ls = separated_list(VIRGULE, VAR) { ls }
 
 // Définition: <expression> {<plusmoins> <term>}
-term:
-| f = facteur { (f, []) }
-| f = facteur m = multdiv t = facteur rest = term { (f, (m, t) :: snd rest) }
-
 expression:
-| f = term { (f, []) }
-| f = term m = plusmoins t = term rest = expression { (f, (m, t) :: snd rest) }
+| t = term rest = expr_tail { (t, rest) }
+
+expr_tail:
+| pm = plusmoins t = term rest = expr_tail { (pm, t) :: rest }
+| { [] }
+
+term:
+| f = facteur rest = term_tail { (f, rest) }
+
+term_tail:
+| md = multdiv f = facteur rest = term_tail { (md, f) :: rest }
+| { [] }
 
 // Définition: <var> | <nombre> | "("<expression>")" 
 facteur:
