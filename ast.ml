@@ -92,7 +92,7 @@ let new_var s v env = match (get_var s env.var_liste ) with
 |Some x ->env.var_liste<- (s,v)::List.filter (fun a -> a!=(s,x)) env.var_liste
 
 let rec eval_instruction env = function 
-|Imprime l -> print_expression env l; env.index<-env.index+1
+|Imprime l -> print_expression env l; print_newline(); env.index<-env.index+1
 |SiAlors (e1, r, e2, instruction)-> if (eval_relop r (eval_expression env e1) (eval_expression env e2 )) then 
   eval_instruction env instruction 
   else env.index<-env.index+1
