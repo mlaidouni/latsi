@@ -3,7 +3,7 @@ open Parser
 }
 
 let layout = [ ' ' '\t']
-let string = ['"'] ([' ' ''' 'a'-'z' 'A'-'Z' '0'-'9' '+' '*' ',' ';' ':' '(' ')' '.' '_'] | '\\' ['"'])* ['"']
+let string = [^ '\\' '"'] | '\\' ['\\' '"']
 let var = ['A'-'Z']
 let nombre = ['0'-'9']+
 
@@ -31,9 +31,8 @@ rule main = parse
   | "<>"       { NEQ }
   | "<="       { INFEQ }
   | ">="       { SUPEQ }
-  (* | '"'        { QUOTE } *)
   | ','        { VIRGULE }
   | var        { VAR (Lexing.lexeme lexbuf) }
   | nombre     { NOMBRE (int_of_string(Lexing.lexeme lexbuf)) }
-  | string+    { STRING (Lexing.lexeme lexbuf) }
+  | '"' ((string)* as s) '"'     { STRING s }
   | _          { failwith "unexpected character" }
