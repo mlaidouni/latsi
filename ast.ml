@@ -105,13 +105,25 @@ let rec enter env = function
      | Failure _ -> print_endline "Invalid input format"; enter env t)
 | [] -> ()
 
+(* Renvoie l'indice, dans la liste env.programme, de la ligne d'index demandée, ou -1 sinon *)
+let rec find_index listligne index i = match listligne with
+| [] -> -1
+| Ligne (n,_)::t -> if n = index then i else find_index t index (i+1)
+  
+let find_ligne_index listligne index = find_index listligne index 0
+
+let eval_vavers env e =
+  if (find_ligne_index env.programme (eval_expression env e) != -1)
+    then env.index<-find_ligne_index env.programme (eval_expression env e)
+  else raise (Undifined_var "La ligne d'index demandé n'est pas définie !")
+
 
 let rec eval_instruction env = function 
 |Imprime l -> print_expression env l; print_newline(); env.index<-env.index+1
 |SiAlors (e1, r, e2, instruction)-> if (eval_relop r (eval_expression env e1) (eval_expression env e2 )) then 
   eval_instruction env instruction 
   else env.index<-env.index+1
-|Vavers _ -> ()
+|Vavers e -> eval_vavers env e
 |Entree vl -> enter env vl ; env.index<-env.index+1
 |Affectation (s,e)-> new_var s (eval_expression env e ) env ; env.index<-env.index+1
 |Fin -> exit 0
