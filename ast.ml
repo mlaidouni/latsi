@@ -100,7 +100,7 @@ let rec enter env = function
        let x = int_of_string nb in 
        new_var v x env; 
        enter env t
-     with
+     with 
      | End_of_file -> print_endline "End of input"
      | Failure _ -> print_endline "Invalid input format"; enter env t)
 | [] -> ()

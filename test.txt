@@ -1,4 +1,5 @@
 5 REM "Ce programme est formidable."
+6 ENTREE A
 10 IMPRIME "Bonjour Paris"
 11 I = 0
 12 SI I <= 0 ALORS NL

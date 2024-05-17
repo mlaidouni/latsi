@@ -1,25 +1,25 @@
 open Ast
 
-let lexbuf = Lexing.from_channel stdin 
+let lexbuf = Lexing.from_channel stdin
 
+(* Fonction pour initialiser l'environnement *)
+let initialize_env programme =
+  { Ast.programme; Ast.index = 0; Ast.var_liste = [] }
+
+(* Fonction récursive pour évaluer les instructions *)
+let rec eval_aux env =
+  let Ast.Ligne (_, instr) = List.nth env.Ast.programme env.Ast.index in
+  Ast.eval_instruction env instr;
+  eval_aux env
+
+(* Fonction principale pour évaluer le programme *)
 let eval (p : Ast.programme) =
-  let programme =
-    List.sort (fun (Ast.Ligne(x, _)) (Ast.Ligne(y, _)) -> compare x y) p
-    |> List.filter (fun x -> match x with Ast.Ligne(_, Ast.Rem _ )-> false | _ -> true)
-  in
+  let programme =   List.sort (fun (Ast.Ligne(x, _)) (Ast.Ligne(y, _)) -> compare x y) p in
   if programme = [] then raise Empty_program
   else
-    let env = { Ast.programme; Ast.index =  0; Ast.var_liste =  [] } in
-    let rec aux () =
-      let Ast.Ligne (_, instr) = List.nth programme env.Ast.index in
-Ast.eval_instruction env instr
-;
-      aux ()
-    in
-    aux ()
+    let env = initialize_env programme in
+    eval_aux env
 
-let ast = Parser.programme Lexer.main lexbuf 
+let ast = Parser.programme Lexer.main lexbuf
 
-
-let () = eval ast 
-    
+let () = eval ast
