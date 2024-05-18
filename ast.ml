@@ -38,7 +38,7 @@ exception Empty_program
 (* Définition de la variable qui env qui stock la ligne actuel et les variables qui ont été assigées *)
 type env = {
   programme : programme;
-  mutable var_liste : (var * int) list;
+  mutable var_liste : (var * nombre) list;
   mutable index : int;
 }
 
@@ -103,7 +103,7 @@ let rec print_expression env = function
 (* Fonction qui crée une nouvelle variable *)
 let new_var s v env =
   match get_var s env.var_liste with
-  | None -> env.var_liste <- (s, v) :: env.var_liste
+  | None -> ()
   | Some x ->
       env.var_liste <-
         (s, v) :: List.filter (fun a -> a != (s, x)) env.var_liste
