@@ -29,6 +29,7 @@ rule main = parse
   | '<'        { INF }
   | '>'        { SUP }
   | "<>"       { NEQ }
+  | "><"       { NEQ }
   | "<="       { INFEQ }
   | ">="       { SUPEQ }
   | ','        { VIRGULE }

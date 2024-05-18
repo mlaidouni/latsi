@@ -1,11 +1,10 @@
 (ocamllex
  (modules lexer))
-(menhir
-  (modules parser)
-  (infer true)
-  (flags --explain --dump --trace parser.mly))
 
+(menhir
+ (modules parser)
+ (infer true)
+ (flags --explain --dump parser.mly))
 
 (executable
  (name main))
- 

@@ -8,7 +8,6 @@ open Ast
 %token<string> VAR
 %token<string> STRING
 
-
 %start<Ast.programme> programme
 
 %%

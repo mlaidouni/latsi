@@ -1,0 +1,52 @@
+1 REM "Ce programme est formidable."
+5 IMPRIME "Début du programme..."
+8 IMPRIME "(* Lecture des lignes en fonction du numéro - IMPRIME - REM *)"
+10 IMPRIME "(* Affectation - opé '</>=' '+' '=' '<>' '><' - NL - SI ALORS & imbrication - IMPRIME expressions & liste *)"
+11 IMPRIME " TEST: [I = 0 ; Si I ≤ 0 ALORS NL ; I = 1 ; SI < 1 ALORS FIN ;]"
+12 I = 0
+13 SI I <= 0 ALORS NL
+15 SI I < 1 ALORS FIN
+14 I = 1
+16 IMPRIME "Anniverssaire d'AYADI Janad: " , 22 + I , " octobre"
+17 IMPRIME " TEST: [Si I <> 0 ALORS SI I >< 0 ALORS SI I = 0 ALORS FIN ; NL ;]"
+18 SI I <> 0 ALORS SI I >< 0 ALORS SI I = 0 ALORS FIN
+19 NL
+20 IMPRIME "(* VAVERS - Boucle VAVERS avec Test de condition - multiplication & division *)"
+21 IMPRIME " TEST: [SI I < 6 ALORS I++ ; SI I < 6 ALORS VAVERS boucle while ; I*=2 ; VAVERS sortie de boucle ;]"
+22 IMPRIME "Entree dans une boucle: \"while(i < 6) i++\" ..."
+23 SI I < 6 ALORS I = I + 1
+24 IMPRIME "I vaut mtn : ", I
+25 SI I < 6 ALORS VAVERS 23
+26 I = I * 2
+27 IMPRIME "I vaut mtn : ", I
+28 IMPRIME "I/4 = ", I/4
+29 VAVERS 34
+32 IMPRIME "Ne doit pas s'imprimer !"
+34 IMPRIME "VAVERS a fonctionné !"
+35 NL
+50 IMPRIME "(* Additions et division avec parenthésage *)"
+51 IMPRIME " TEST: [Y = (19 + 18 + 20)/3 ; X = (14 + 18) / 2 ; W = (Y*35)/100 ; Z = (X * 10)/100 ;] "
+52 Y = (18 + 19 + 20)/3
+53 X = (14 + 18) / 2
+55 IMPRIME "Y vaut : ", Y
+54 IMPRIME "X vaut : ", X
+57 W = (Y*35)/100
+56 Z = (X * 10)/100
+58 IMPRIME "-> Note finale : ", W, " + ", Z, " = ", W+Z+5
+59 NL
+60 IMPRIME "(* ENTREE *)"
+61 IMPRIME " TEST: [ENTREE A, B, C ; M = A + B + C ;]"
+62 ENTREE A, B, C
+63 IMPRIME "A = ", A, ", B = ", B , ", C = ", C
+64 M = A + B + C
+65 IMPRIME "Somme de A, B & C vaut ", M
+67 NL
+70 REM "Ne s'affiche pas"
+80 REM "Ne s'affiche pas"
+90 IMPRIME "(* FIN - Non lecture des lignes après l'instruction FIN *)"
+91 IMPRIME " TEST: [FIN ;]"
+100 IMPRIME "Ligne 100... Ne doit pas s'imprimer !"
+92 IMPRIME "Fin du programme atteinte..."
+93 FIN
+100 REM "Ne s'affiche pas"
+110 IMPRIME "Ne doit pas s'imprimer !"
