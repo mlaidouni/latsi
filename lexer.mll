@@ -3,7 +3,7 @@ open Parser
 }
 
 let layout = [ ' ' '\t']
-let string = [^ '\\' '"'] | '\\' ['\\' '"']
+let string = [^ '\\' '"'] | '\\' ['\\' '"' 'n' 't' 'r' 'b' 'f' 'u']
 let var = ['A'-'Z']
 let nombre = ['0'-'9']+
 
