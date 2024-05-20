@@ -3,7 +3,8 @@
 ## Sommaire <!-- omit in toc -->
 
 1. [Introduction](#introduction)
-2. [Étapes du Projet](#étapes-du-projet)
+2. [Commandes pour Compiler et Exécuter](#commandes-pour-compiler-et-exécuter)
+3. [Étapes du Projet](#étapes-du-projet)
    1. [Étape 1 : Lexeur (`lexer.mll`)](#étape-1--lexeur-lexermll)
    2. [Étape 2 : Analyseur Syntaxique (`parser.mly`)](#étape-2--analyseur-syntaxique-parsermly)
    3. [Travail en binôme - Étapes 1 et 2](#travail-en-binôme---étapes-1-et-2)
@@ -11,11 +12,18 @@
    5. [Travail en binôme - Étape 3](#travail-en-binôme---étape-3)
    6. [Étape 4 : Extension avec `VAVERS` et `ENTREE` (`ast.ml`)](#étape-4--extension-avec-vavers-et-entree-astml)
    7. [Travail en binôme - Étape 4](#travail-en-binôme---étape-4)
-      1. [Commandes pour Compiler et Exécuter](#commandes-pour-compiler-et-exécuter)
+
 
 ## Introduction
 
 Le projet vise à implémenter un interpréteur pour le langage LATSI (Langage Très Simple d'Instructions).
+
+## Commandes pour Compiler et Exécuter
+
+Pour compiler et exécuter le projet, utilisez les commandes suivantes :
+
+- **Compilation** : `dune build`
+- **Exécution** : `_build/default/main.exe exemples/test-general.latsi`
 
 ## Étapes du Projet
 
@@ -49,9 +57,3 @@ L'instruction `ENTREE` nous a posé problème mais nous avons finalement réussi
 
 - **Organisation** : Nous avons travaillé en utilisant un outils de gestion de versions (Git) pour partager le code et suivre les modifications. Les échanges réguliers ont permis de résoudre les problèmes ensemble.
 
-#### Commandes pour Compiler et Exécuter
-
-Pour compiler et exécuter le projet, utilisez les commandes suivantes :
-
-- **Compilation** : `dune build`
-- **Exécution** : `_build/default/main.exe exemples/test-general.latsi`
