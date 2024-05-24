@@ -35,11 +35,11 @@
 58 IMPRIME "-> Note finale : ", W, " + ", Z, " = ", W+Z+5
 59 NL
 60 IMPRIME "(* ENTREE *)"
-61 IMPRIME " TEST: [ENTREE A, B, C ; M = A + B + C ;]"
+61 IMPRIME " TEST: [ENTREE A, B, C ; (A + B) * C ; A + B * C  ;]"
 62 ENTREE A, B, C
 63 IMPRIME "A = ", A, ", B = ", B , ", C = ", C
-64 M = A + B + C
-65 IMPRIME "Somme de A, B & C vaut ", M
+64 M = (A + B) * C
+65 IMPRIME "(A + B) * C vaut ", M , " et A + B * C ", A + B * C
 67 NL
 70 REM "Ne s'affiche pas"
 80 REM "Ne s'affiche pas"
